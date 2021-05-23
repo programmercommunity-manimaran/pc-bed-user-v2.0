@@ -40,7 +40,7 @@ public class UserService {
 
 	public Response getValidEmail(String email) {
 		if (this.userRepository.existsById(email)) {
-			throw new UserNotFound("Mail already exists");
+			return  new Response(200,"Email Exist");
 		}
 		return new Response(200, "Success");
 	}
@@ -58,7 +58,7 @@ public class UserService {
 
 	public Response addUser(User user) {
 		if (this.userRepository.existsById(user.getEmail())) {
-			throw new UserNotFound("Mail already exists");
+			return new Response(200, "Email Exist");
 		}
 		this.userRepository.save(user);
 		return new Response(200, "Success");

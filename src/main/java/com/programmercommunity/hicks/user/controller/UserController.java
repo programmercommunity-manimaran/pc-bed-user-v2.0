@@ -22,19 +22,13 @@ import com.programmercommunity.hicks.user.model.Response;
 import com.programmercommunity.hicks.user.model.User;
 import com.programmercommunity.hicks.user.service.UserService;
 
-@CrossOrigin(origins = "*")
 @RestController
+@CrossOrigin
 public class UserController {
 
 	@Autowired
 	UserService userService;
 
-	@ModelAttribute
-	public void setResponseHeader(HttpServletResponse response){
-		response.setHeader("Cache-Control","no-cache");
-		response.setHeader("Access-Control-Allow-Origin","*");
-		response.setHeader("Content-Type","application/json");
-	}
 	
 	@GetMapping(Paths.UserControllerPaths.GET_ALL_USERS)
 	public @ResponseBody List<User> getAllUsers() {

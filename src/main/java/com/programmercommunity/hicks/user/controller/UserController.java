@@ -2,6 +2,8 @@ package com.programmercommunity.hicks.user.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.programmercommunity.hicks.user.assets.Paths;
@@ -24,6 +27,13 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	@ModelAttribute
+	public void setResponseHeader(HttpServletResponse response){
+		response.setHeader("Cache-Control","no-cache");
+		response.setHeader("Access-Control-Allow-Origin","*");
+		response.setHeader("Content-Type","application/json");
+	}
+	
 	@GetMapping(Paths.UserControllerPaths.GET_ALL_USERS)
 	public @ResponseBody List<User> getAllUsers() {
 		return this.userService.getAllUsers();
